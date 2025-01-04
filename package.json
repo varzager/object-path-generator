@@ -11,6 +11,14 @@
     "name": "Guy Wargzaer",
     "email": "varager@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varzager/object-path-generator.git"
+  },
+  "homepage": "https://github.com/varzager/object-path-generator#readme",
+  "bugs": {
+    "url": "https://github.com/varzager/object-path-generator/issues"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc && yarn run lint",
