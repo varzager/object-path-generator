@@ -78,23 +78,23 @@ interface MyObject {
 }
 
 const realObject = {
-  name: 'John Doe',
+  name: 'Ash Williams',
 };
 
 const objectProxy = pathgen<MyObject>('', (path, options) => {
   return get(realObject, path, 'default value');
 });
 
-console.log(objectProxy.name()); // Outputs: "John Doe"
-console.log(objectProxy.address()); // Outputs: "default value"
+console.log(objectProxy.name()); // Outputs: "Ash Williams"
+console.log(objectProxy.details.address()); // Outputs: "default value"
 ```
 
 ---
 
 #### Example 2: Using Translations
 
+`messages_en.json`
 ```json
-// messages_en.json
 {
   "common": {
     "loggedIn": {
@@ -117,11 +117,19 @@ interface Translations {
   readingWarning: (data: Record<'reader' | 'writer', unknown>) => string;
 }
 
-const translations = pathgen<Translations>(undefined, (path, ...options) => {
-  const { t } = useI18n(); // Example translation function
-  return t(path, ...options);
-});
+// useTransaltions.ts
 
+const useTransaltions = () => {
+   const { t } = useI18n(); // Example translation function
+   const translations = useMemo(pathgen<Translations>(undefined, (path, ...options) => {
+     return t(path, ...options);
+   }), [t]);
+
+   return {translations};
+}
+
+// main.tsx
+const {translations} = useTranslations();
 console.log(translations.common.loggedIn.message({ username: 'Ash' }));
 // Outputs: "Hey Ash, you have successfully logged in!"
 console.log(translations.readingWarning({ reader: 'Sam', writer: 'Alex' }));
@@ -133,6 +141,13 @@ console.log(translations.readingWarning({ reader: 'Sam', writer: 'Alex' }));
 ## API
 
 ### `pathgen`
+
+#### Generic Types
+
+1. **`T`**:
+   - Represents the structure of the object for which paths are generated. This is typically an interface or type defining the shape of your object.
+2. **`R`** *(optional)*:
+   - The return type of the generated functions. Defaults to `string`.
 
 #### Parameters
 
@@ -146,9 +161,9 @@ console.log(translations.readingWarning({ reader: 'Sam', writer: 'Alex' }));
 
 #### Returns
 
-An object with the same shape as the input type `T` and return type `R` (`string` by default), where:
+An object with the same structure as the input type `T` where:
 - Nested objects are recursively transformed into proxies.
-- Leaf properties become functions (`() => R`) that return their path or the result of `customFn`.
+- Leaf properties that are primitive become functions (`() => R`(`string` by default)) that return their path or the result of `customFn`.
 
 ---
 
