@@ -1,0 +1,17 @@
+.idea
+.vscode
+.DS_Store
+node_modules
+target
+dist
+*.iml
+npm-debug.log
+*/yarn-error.log
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+!.yarn/cache
