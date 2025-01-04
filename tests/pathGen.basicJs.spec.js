@@ -1,4 +1,4 @@
-const { pathgen } = require("./pathGen");
+const { pathgen } = require("../src/pathGen/pathGen");
 
 describe('pathgen - javascript', () => {
 

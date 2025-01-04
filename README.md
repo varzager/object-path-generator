@@ -87,7 +87,7 @@ interface MyObject {
   };
 }
 
-const realObject = {
+const realObject: MyObject = {
   name: 'Ash Williams',
 };
 

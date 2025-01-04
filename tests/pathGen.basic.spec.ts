@@ -1,4 +1,4 @@
-import {pathgen} from './pathGen';
+import {pathgen} from '../src/pathGen/pathGen';
 
 describe('pathgen - basic', () => {
   let ProxySpy: jest.SpyInstance;
