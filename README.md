@@ -28,29 +28,25 @@ yarn add object-path-generator
 
 ## Usage
 
-### Import the Library
-
-```ts
-import { pathgen } from 'object-path-generator';
-```
-
----
-
 ### Basic js Example
 ```js
+const { pathgen } = require('object-path-generator');
 const gen = pathgen();
 console.log(gen.blah.blah()); // Output: "blah.blah"
 console.log(gen.blah.blah.blah()); // Output: "blah.blah.blah"
-console.log(gen.testing.something[9][2].complex()); // Output: "testing.something.9.2.run"
-console.log(gen.Down.The.Rabbit.Hole('Alice', {In: 'Wonderland'})); // Output: "Down.The.Rabbit.Hole Alice In-Wonderland"
+console.log(gen.testing.something[9][2].complex()); 
+// Output: "testing.something.9.2.run"
+console.log(gen.Down.The.Rabbit.Hole('Alice', {In: 'Wonderland'})); 
+// Output: "Down.The.Rabbit.Hole Alice In-Wonderland"
 ```
-
+___
 
 ### Basic Typescript Example
 
 Generate type-safe object paths dynamically:
 
 ```ts
+import { pathgen } from 'object-path-generator';
 export const AlignmentDataHooks = pathgen<{
   Root: string;
   Label: string;
@@ -58,15 +54,16 @@ export const AlignmentDataHooks = pathgen<{
   Item({ id: string }): string;
 }>('AlignmentDataHooks');
 
-console.log(AlignmentDataHooks.Root()); // Outputs: "AlignmentDataHooks.Root"
-console.log(AlignmentDataHooks.Label()); // Outputs: "AlignmentDataHooks.Label"
+console.log(AlignmentDataHooks.Root()); 
+// Outputs: "AlignmentDataHooks.Root"
+console.log(AlignmentDataHooks.Label()); 
+// Outputs: "AlignmentDataHooks.Label"
 console.log(AlignmentDataHooks.HorizontalOption(ContentJustification.Center)); 
 // Outputs: "AlignmentDataHooks.HorizontalOption center"
 console.log(AlignmentDataHooks.Item({ id: '123' })); 
 // Outputs: "AlignmentDataHooks.Item id-123"
 ```
 
----
 
 ### Advanced Usage with Custom Function
 
@@ -99,12 +96,10 @@ console.log(objectProxy.name()); // Outputs: "Ash Williams"
 console.log(objectProxy.details.address()); // Outputs: "default value"
 ```
 
----
-
 #### Example 2: Using Translations
 
-`messages_en.json`
-```json
+```js
+// messages_en.json
 {
   "common": {
     "loggedIn": {
@@ -128,9 +123,8 @@ interface Translations {
 }
 
 // useTransaltions.ts
-
 const useTransaltions = () => {
-   const { t } = useI18n(); // Example translation function
+   const { t } = useI18n();
    const translations = useMemo(pathgen<Translations>(undefined, (path, ...options) => {
      return t(path, ...options);
    }), [t]);

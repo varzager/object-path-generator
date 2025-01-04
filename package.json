@@ -2,24 +2,6 @@
   "name": "object-path-generator",
   "description": "A lightweight library to generate object paths",
   "version": "1.0.3",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "author": {
-    "name": "Guy Wargzaer",
-    "email": "varager@gmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/varzager/object-path-generator.git"
-  },
-  "homepage": "https://github.com/varzager/object-path-generator#readme",
-  "bugs": {
-    "url": "https://github.com/varzager/object-path-generator/issues"
-  },
-  "license": "MIT",
   "scripts": {
     "build": "tsc && yarn run lint",
     "lint": "eslint src",
@@ -43,5 +25,33 @@
   },
   "dependencies": {
     "tslib": "^2.8.1"
-  }
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": {
+    "name": "Guy Wargzaer",
+    "email": "varager@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varzager/object-path-generator.git"
+  },
+  "homepage": "https://github.com/varzager/object-path-generator#readme",
+  "bugs": {
+    "url": "https://github.com/varzager/object-path-generator/issues"
+  },
+  "license": "MIT",
+  "keywords": [
+    "object-path",
+    "path",
+    "generator",
+    "dynamic",
+    "typescript",
+    "utility",
+    "data-hooks",
+    "translations"
+  ]
 }

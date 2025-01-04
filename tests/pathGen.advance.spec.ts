@@ -1,4 +1,4 @@
-import { pathgen } from '../src/pathGen/pathGen';
+import { pathgen } from '../src';
 import * as _ from 'lodash';
 
 describe('pathgen - advance', () => {
