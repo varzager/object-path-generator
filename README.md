@@ -41,8 +41,8 @@ import { pathgen } from 'object-path-generator';
 const gen = pathgen();
 console.log(gen.blah.blah()); // Output: "blah.blah"
 console.log(gen.blah.blah.blah()); // Output: "blah.blah.blah"
-console.log(gen.testing.something[9][2].run()); // Output: "testing.something.9.2.run"
-console.log(Simple.Down.The.Rabbit.Hole('Alice', {In: 'Wonderland'})); // Output: "Down.The.Rabbit.Hole Alice In-Wonderland"
+console.log(gen.testing.something[9][2].complex()); // Output: "testing.something.9.2.run"
+console.log(gen.Down.The.Rabbit.Hole('Alice', {In: 'Wonderland'})); // Output: "Down.The.Rabbit.Hole Alice In-Wonderland"
 ```
 
 
