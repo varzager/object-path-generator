@@ -1,11 +1,16 @@
 {
   "name": "object-path-generator",
+  "description": "A lightweight library to generate object paths",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "author": {
+    "name": "Guy Wargzaer",
+    "email": "varager@gmail.com"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc && yarn run lint",
