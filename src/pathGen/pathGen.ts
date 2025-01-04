@@ -56,7 +56,7 @@ const pathgenInner = (
     },
   );
 
-export const pathgen = <T, R = string>(
+export const pathgen = <T = any, R = string>(
   root?: string,
   customFn?: (path: string, ...options: any[]) => R,
 ): PathGenElements<DeepRequired<T>, R> =>

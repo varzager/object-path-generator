@@ -1,6 +1,6 @@
 import {pathgen} from './pathGen';
 
-describe('pathgen - dataHooks', () => {
+describe('pathgen - basic', () => {
   let ProxySpy: jest.SpyInstance;
 
   beforeEach(() => {
@@ -14,7 +14,12 @@ describe('pathgen - dataHooks', () => {
     jest.restoreAllMocks(); // Restore original implementations.
   });
 
-  it('should have simple dataHook', () => {
+  it('should support typeless', () => {
+    const Simple = pathgen();
+    expect(Simple.blah.blah()).toBe('blah.blah');
+  })
+
+  it('should have simple path', () => {
     const Simple = pathgen<{
       FirstValue: string;
       SecondValue: string;
@@ -25,7 +30,7 @@ describe('pathgen - dataHooks', () => {
     expect(Simple.ThirdValue()).toBe('Simple.ThirdValue');
   });
 
-  it('should have nested datahook', () => {
+  it('should have nested path', () => {
     const Nested = pathgen<{
       Parent: {
         Child: {

@@ -36,7 +36,17 @@ import { pathgen } from 'object-path-generator';
 
 ---
 
-### Basic Example
+### Basic js Example
+```js
+const gen = pathgen();
+console.log(gen.blah.blah()); // Output: "blah.blah"
+console.log(gen.blah.blah.blah()); // Output: "blah.blah.blah"
+console.log(gen.testing.something[9][2].run()); // Output: "testing.something.9.2.run"
+console.log(Simple.Down.The.Rabbit.Hole('Alice', {In: 'Wonderland'})); // Output: "Down.The.Rabbit.Hole Alice In-Wonderland"
+```
+
+
+### Basic Typescript Example
 
 Generate type-safe object paths dynamically:
 
@@ -141,6 +151,7 @@ console.log(translations.readingWarning({ reader: 'Sam', writer: 'Alex' }));
 ## API
 
 ### `pathgen`
+`pathgen<T, R>(root?: string, customFn?: (path: string, ...options: any[]) => R)`
 
 #### Generic Types
 
