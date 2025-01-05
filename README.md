@@ -178,6 +178,7 @@ An object with the same structure as the input type `T` where:
 - **Reusable Paths**: Generate paths dynamically for use in multiple contexts (e.g., `data-hook` attributes, translations, and object access).
 - **Type Safety**: Leverage TypeScript to ensure type safety and autocompletion for object paths.
 - **Customizable Behavior**: Extend functionality with custom logic for dynamic path generation.
+- **Caching for Performance**: Reuses previously generated paths through an internal cache, reducing the overhead of creating and resolving paths repeatedly. This improves performance in scenarios where paths are accessed or generated frequently, such as rendering large UI components or processing deeply nested objects.
 
 ---
 
