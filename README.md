@@ -1,4 +1,4 @@
-# object-path-generator
+# object-path-generator &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/varzager/object-path-generator/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/object-path-generator.svg?style=flat)](https://www.npmjs.com/package/object-path-generator)
 
 `object-path-generator` is a lightweight TypeScript utility library for dynamically generating paths for object properties at runtime. This tool simplifies the creation of data hooks, translation keys, and object paths for use with utilities like Lodash's `get` and `set`.
 
