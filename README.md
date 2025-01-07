@@ -29,17 +29,19 @@ yarn add object-path-generator
 ## Usage
 
 ### Basic js Example
+
 ```js
 const { pathgen } = require('object-path-generator');
 const gen = pathgen();
 console.log(gen.blah.blah()); // Output: "blah.blah"
 console.log(gen.blah.blah.blah()); // Output: "blah.blah.blah"
-console.log(gen.testing.something[9][2].complex()); 
+console.log(gen.testing.something[9][2].complex());
 // Output: "testing.something.9.2.run"
-console.log(gen.Down.The.Rabbit.Hole('Alice', {In: 'Wonderland'})); 
+console.log(gen.Down.The.Rabbit.Hole('Alice', { In: 'Wonderland' }));
 // Output: "Down.The.Rabbit.Hole Alice In-Wonderland"
 ```
-___
+
+---
 
 ### Basic Typescript Example
 
@@ -54,16 +56,15 @@ export const AlignmentDataHooks = pathgen<{
   Item({ id: string }): string;
 }>('AlignmentDataHooks');
 
-console.log(AlignmentDataHooks.Root()); 
+console.log(AlignmentDataHooks.Root());
 // Outputs: "AlignmentDataHooks.Root"
-console.log(AlignmentDataHooks.Label()); 
+console.log(AlignmentDataHooks.Label());
 // Outputs: "AlignmentDataHooks.Label"
-console.log(AlignmentDataHooks.HorizontalOption(ContentJustification.Center)); 
+console.log(AlignmentDataHooks.HorizontalOption(ContentJustification.Center));
 // Outputs: "AlignmentDataHooks.HorizontalOption center"
-console.log(AlignmentDataHooks.Item({ id: '123' })); 
+console.log(AlignmentDataHooks.Item({ id: '123' }));
 // Outputs: "AlignmentDataHooks.Item id-123"
 ```
-
 
 ### Advanced Usage with Custom Function
 
@@ -124,16 +125,19 @@ interface Translations {
 
 // useTransaltions.ts
 const useTransaltions = () => {
-   const { t } = useI18n();
-   const translations = useMemo(pathgen<Translations>(undefined, (path, ...options) => {
-     return t(path, ...options);
-   }), [t]);
+  const { t } = useI18n();
+  const translations = useMemo(
+    pathgen<Translations>(undefined, (path, ...options) => {
+      return t(path, ...options);
+    }),
+    [t],
+  );
 
-   return {translations};
-}
+  return { translations };
+};
 
 // main.tsx
-const {translations} = useTranslations();
+const { translations } = useTranslations();
 console.log(translations.common.loggedIn.message({ username: 'Ash' }));
 // Outputs: "Hey Ash, you have successfully logged in!"
 console.log(translations.readingWarning({ reader: 'Sam', writer: 'Alex' }));
@@ -145,28 +149,31 @@ console.log(translations.readingWarning({ reader: 'Sam', writer: 'Alex' }));
 ## API
 
 ### `pathgen`
+
 `pathgen<T, R>(root?: string, customFn?: (path: string, ...options: any[]) => R)`
 
 #### Generic Types
 
 1. **`T`**:
    - Represents the structure of the object for which paths are generated. This is typically an interface or type defining the shape of your object.
-2. **`R`** *(optional)*:
+2. **`R`** _(optional)_:
    - The return type of the generated functions. Defaults to `string`.
 
 #### Parameters
 
-1. **`root`** *(optional)*:
-    - A string representing the root prefix for the generated paths. Typically, this is the name of the object you are generating paths for.
+1. **`root`** _(optional)_:
 
-2. **`customFn`** *(optional)*:
-    - A function called when a path is accessed. It receives:
-        - `path`: The current path as a string.
-        - `...options`: Additional arguments passed when the path is accessed.
+   - A string representing the root prefix for the generated paths. Typically, this is the name of the object you are generating paths for.
+
+2. **`customFn`** _(optional)_:
+   - A function called when a path is accessed. It receives:
+     - `path`: The current path as a string.
+     - `...options`: Additional arguments passed when the path is accessed.
 
 #### Returns
 
 An object with the same structure as the input type `T` where:
+
 - Nested objects are recursively transformed into proxies.
 - Leaf properties that are primitive become functions (`() => R`(`string` by default)) that return their path or the result of `customFn`.
 

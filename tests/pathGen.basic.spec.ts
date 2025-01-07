@@ -1,13 +1,15 @@
-import {pathgen} from '../src';
+import { pathgen } from '../src';
 
 describe('pathgen - basic', () => {
   let ProxySpy: jest.SpyInstance;
 
   beforeEach(() => {
     const originalProxy = Proxy;
-    ProxySpy = jest.spyOn(global, 'Proxy').mockImplementation((target, handler) => {
-      return new originalProxy(target, handler);
-    });
+    ProxySpy = jest
+      .spyOn(global, 'Proxy')
+      .mockImplementation((target, handler) => {
+        return new originalProxy(target, handler);
+      });
   });
 
   afterEach(() => {
@@ -17,7 +19,7 @@ describe('pathgen - basic', () => {
   it('should support typeless', () => {
     const Simple = pathgen();
     expect(Simple.blah.blah()).toBe('blah.blah');
-  })
+  });
 
   it('should have simple path', () => {
     const Simple = pathgen<{
@@ -39,12 +41,14 @@ describe('pathgen - basic', () => {
       };
     }>('Nested');
 
-    expect(Nested.Parent.Child.GrandChild()).toBe('Nested.Parent.Child.GrandChild');
+    expect(Nested.Parent.Child.GrandChild()).toBe(
+      'Nested.Parent.Child.GrandChild',
+    );
   });
 
   it('should have complex datahook', () => {
     const Complex = pathgen<{
-      FirstValue: {name: string};
+      FirstValue: { name: string };
       Mother: {
         Daughter: {
           Sophie: string;
@@ -60,15 +64,21 @@ describe('pathgen - basic', () => {
 
     expect(Complex.FirstValue.name()).toBe('Complex.FirstValue.name');
     expect(Complex.Mother.Son('donny')).toBe('Complex.Mother.Son donny');
-    expect(Complex.Mother.Daughter.Sophie()).toBe('Complex.Mother.Daughter.Sophie');
+    expect(Complex.Mother.Daughter.Sophie()).toBe(
+      'Complex.Mother.Daughter.Sophie',
+    );
     expect(Complex.Mother.Daughter.Lora()).toBe('Complex.Mother.Daughter.Lora');
-    expect(Complex.Mother.Daughter.Adopted.Linda()).toBe('Complex.Mother.Daughter.Adopted.Linda');
-    expect(Complex.Mother.Daughter.Adopted.Other('virginia')).toBe('Complex.Mother.Daughter.Adopted.Other virginia');
+    expect(Complex.Mother.Daughter.Adopted.Linda()).toBe(
+      'Complex.Mother.Daughter.Adopted.Linda',
+    );
+    expect(Complex.Mother.Daughter.Adopted.Other('virginia')).toBe(
+      'Complex.Mother.Daughter.Adopted.Other virginia',
+    );
   });
 
   it('should use cache', () => {
     const Complex = pathgen<{
-      FirstValue: {name: string};
+      FirstValue: { name: string };
       Mother: {
         Daughter: {
           Sophie: string;

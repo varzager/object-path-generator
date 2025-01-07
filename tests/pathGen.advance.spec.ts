@@ -46,14 +46,19 @@ describe('pathgen - advance', () => {
       },
     };
 
-    const objectProxy = pathgen<MYObject>('', (path, options) => {
-      const val = _.get(
-        realObject,
-        path,
-        _.get(defaultsValues, path, expectedDefaultValue),
-      ) as any;
-      return val && typeof val === 'function' ? val(options) : val;
-    });
+    const objectProxy = pathgen<MYObject>(
+      '',
+      (path: string, options: any[]) => {
+        const val = _.get(
+          realObject,
+          path,
+          _.get(defaultsValues, path, expectedDefaultValue),
+        ) as any;
+        return (
+          val && typeof val === 'function' ? val(options) : val
+        ) as string;
+      },
+    );
     expect(objectProxy.FirstValue.name()).toBe(realObject.FirstValue?.name);
     expect(objectProxy.names[0].name()).toBe(realObject.names?.[0].name);
     expect(objectProxy.Mother.Daughter.Adopted.Other()).toBe(

@@ -1,3 +1,3 @@
-import {pathgen} from "./pathGen/pathGen";
+import { pathgen } from './pathGen/pathGen';
 
-export {pathgen};
+export { pathgen };
