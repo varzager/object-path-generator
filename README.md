@@ -8,6 +8,10 @@
 
 ---
 
+![Usage example](assets/object-path-generator.webp)
+
+---
+
 ## Features
 
 - **Dynamic Path Generation**: Easily generate object paths in a type-safe way.
@@ -31,9 +35,6 @@ yarn add object-path-generator
 ---
 
 ## Usage
-
-![Usage example](assets/object-path-generator.gif)
-
 
 ### Basic js Example
 
