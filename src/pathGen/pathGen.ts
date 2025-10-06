@@ -1,3 +1,5 @@
+import { getPathWithArgs } from './pathGen.utils';
+
 type DeepRequired<T = any> = {
   [K in keyof T]-?: NonNullable<T[K]> extends Function
     ? NonNullable<T[K]>
@@ -29,23 +31,7 @@ const pathgenInner = (
       if (customFn) {
         return customFn(path, ...options);
       }
-      let finalPath = path;
-      if (options.length > 0) {
-        const finalOptions = options.flatMap((option) => {
-          if (Array.isArray(option)) {
-            return option;
-          } else if (typeof option === 'object') {
-            return Object.entries(option).map(
-              ([key, value]) => `${key}-${value}`,
-            );
-          } else {
-            return [option];
-          }
-        });
-
-        finalPath = [finalPath, ...finalOptions].join(' ');
-      }
-      return finalPath;
+      return getPathWithArgs(path, options);
     },
     {
       get(_target, prop: string) {
@@ -65,4 +51,4 @@ export const pathgen = <T = any, R = undefined>(
 ): PathGenElements<
   DeepRequired<T>,
   R extends undefined ? (typeof customFn extends undefined ? string : R) : R
-> => pathgenInner(root, root, customFn, customFn) as any;
+> => pathgenInner(root, root, customFn) as any;

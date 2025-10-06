@@ -1,3 +1,2 @@
-import { pathgen } from './pathGen/pathGen';
-
-export { pathgen };
+export { pathgen } from './pathGen/pathGen';
+export * from './pathGen/pathGen.utils';
